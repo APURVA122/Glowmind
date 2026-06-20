@@ -1,0 +1,76 @@
+.gm-demo-page {
+  min-height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  background: #fafafa;
+}
+
+.gm-demo-page__nav {
+  padding: 16px 32px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gm-demo-page__account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gm-demo-page__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff8fab, #f4628c);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gm-demo-page__name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.gm-demo-page__logout {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #9a7684;
+  background: #fff3f7;
+  border: 1px solid #ffe3ec;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.gm-demo-page__logout:hover {
+  background: #ffe3ec;
+}
+
+.gm-demo-page__logo {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.gm-demo-page__content {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+  color: #333;
+  line-height: 1.7;
+}
+
+.gm-demo-page__byline {
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: -8px;
+}

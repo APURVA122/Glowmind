@@ -1,0 +1,308 @@
+/* -------------------------------------------------------------------
+   theme.css — design tokens & shared primitives
+   Three named palettes (Pink Dream / Lavender Mist / Soft Mint), a
+   rounded type pairing (Quicksand display + Nunito body), and the
+   button styles shared across every GlowMind component.
+   ------------------------------------------------------------------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Nunito', system-ui, sans-serif;
+  color: #2d2d2d;
+}
+
+h1,
+h2,
+h3,
+.gm-font-heading {
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+}
+
+button,
+select,
+textarea,
+input {
+  font-family: inherit;
+}
+
+button:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gm-accent-strong, #f4628c);
+  outline-offset: 2px;
+}
+
+/* ---- Shared tokens (apply to every theme) ---- */
+.gm-root {
+  --gm-radius-sm: 12px;
+  --gm-radius-md: 16px;
+  --gm-radius-lg: 20px;
+  --gm-shadow: 0 8px 32px rgba(120, 90, 140, 0.18);
+  --gm-shadow-sm: 0 4px 14px rgba(120, 90, 140, 0.12);
+  --gm-glass-border: rgba(255, 255, 255, 0.55);
+  --gm-transition: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+  --gm-danger: #c0507a;
+  --gm-danger-bg: rgba(192, 80, 122, 0.1);
+}
+
+/* ---- Pink Dream ----
+   Blush #FF8FAB · Rose Deep #F4628C · Petal #FFE3EC
+   Cream Pink #FFF3F7 · Plum Text #5B3A4A · Dusty Mauve #9A7684 */
+.gm-root[data-theme='pink'] {
+  --gm-accent: #ff8fab;
+  --gm-accent-strong: #f4628c;
+  --gm-bg-1: #ffe3ec;
+  --gm-bg-2: #fff3f7;
+  --gm-glass-bg: rgba(255, 245, 248, 0.65);
+  --gm-text: #5b3a4a;
+  --gm-text-soft: #9a7684;
+}
+
+/* ---- Lavender Mist ----
+   Wisteria #B497E0 · Violet Deep #9572CF · Mist #ECE1FB
+   Pale Lilac #F6F1FD · Deep Plum #4A3B63 · Muted Lilac #897BA3 */
+.gm-root[data-theme='lavender'] {
+  --gm-accent: #b497e0;
+  --gm-accent-strong: #9572cf;
+  --gm-bg-1: #ece1fb;
+  --gm-bg-2: #f6f1fd;
+  --gm-glass-bg: rgba(248, 244, 253, 0.65);
+  --gm-text: #4a3b63;
+  --gm-text-soft: #897ba3;
+}
+
+/* ---- Soft Mint ----
+   Sage Glow #6FC6A0 · Forest Mint #4EA980 · Foam #DDF7EB
+   Pale Mint #F1FCF6 · Deep Pine #2F5B48 · Muted Sage #6F9A87 */
+.gm-root[data-theme='mint'] {
+  --gm-accent: #6fc6a0;
+  --gm-accent-strong: #4ea980;
+  --gm-bg-1: #ddf7eb;
+  --gm-bg-2: #f1fcf6;
+  --gm-glass-bg: rgba(244, 253, 248, 0.65);
+  --gm-text: #2f5b48;
+  --gm-text-soft: #6f9a87;
+}
+
+/* ---- Shared button primitives ---- */
+.gm-btn {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: var(--gm-radius-sm);
+  padding: 10px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: transform var(--gm-transition), box-shadow var(--gm-transition),
+    opacity var(--gm-transition), background var(--gm-transition);
+}
+
+.gm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.gm-btn:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.gm-btn--primary {
+  background: linear-gradient(135deg, var(--gm-accent), var(--gm-accent-strong));
+  color: #fff;
+  box-shadow: var(--gm-shadow-sm);
+}
+
+.gm-btn--ai {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--gm-text);
+  border: 1px solid var(--gm-glass-border);
+  flex-direction: column;
+  font-size: 0.72rem;
+  text-align: center;
+  padding: 10px 6px;
+  gap: 4px;
+}
+
+.gm-btn--ai span:first-child {
+  font-size: 1.1rem;
+}
+
+.gm-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--gm-transition), background var(--gm-transition);
+}
+
+.gm-icon-btn:hover {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.gm-mini-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--gm-text);
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background var(--gm-transition);
+}
+
+.gm-mini-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.gm-mini-btn--ghost {
+  background: transparent;
+  border: 1px solid var(--gm-glass-border);
+}
+
+.gm-mini-btn--danger {
+  color: #c0507a;
+}
+
+.gm-spinner {
+  display: inline-block;
+  animation: gm-spin 1.1s linear infinite;
+}
+
+@keyframes gm-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Shared form primitives (auth pages) ---- */
+.gm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.gm-field label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gm-text-soft);
+}
+
+.gm-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.gm-input-wrap__icon {
+  position: absolute;
+  left: 14px;
+  font-size: 0.95rem;
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.gm-input {
+  width: 100%;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.88rem;
+  color: var(--gm-text);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--gm-glass-border);
+  border-radius: var(--gm-radius-sm);
+  padding: 11px 14px 11px 38px;
+  transition: border-color var(--gm-transition), background var(--gm-transition);
+}
+
+.gm-input--no-icon {
+  padding-left: 14px;
+}
+
+.gm-input::placeholder {
+  color: var(--gm-text-soft);
+  opacity: 0.8;
+}
+
+.gm-input:focus {
+  outline: none;
+  border-color: var(--gm-accent-strong);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.gm-input-wrap__toggle {
+  position: absolute;
+  right: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  opacity: 0.65;
+  padding: 4px;
+}
+
+.gm-input-wrap__toggle:hover {
+  opacity: 1;
+}
+
+.gm-error-banner {
+  background: var(--gm-danger-bg);
+  border: 1px solid rgba(192, 80, 122, 0.3);
+  color: var(--gm-danger);
+  border-radius: var(--gm-radius-sm);
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.gm-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  color: var(--gm-text-soft);
+  margin: 4px 0;
+}
+
+.gm-divider::before,
+.gm-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gm-glass-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

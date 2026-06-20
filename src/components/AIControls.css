@@ -1,0 +1,28 @@
+.gm-ai-controls {
+  background: var(--gm-glass-bg);
+  border: 1px solid var(--gm-glass-border);
+  border-radius: var(--gm-radius-md);
+  padding: 10px 12px;
+  box-shadow: var(--gm-shadow-sm);
+}
+
+.gm-ai-controls__label {
+  margin: 0 0 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gm-text-soft);
+}
+
+.gm-ai-controls__buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.gm-ai-controls__error {
+  margin: 8px 0 0;
+  font-size: 0.72rem;
+  color: #c0507a;
+}

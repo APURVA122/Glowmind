@@ -1,0 +1,61 @@
+.gm-notes-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+
+.gm-composer {
+  background: var(--gm-glass-bg);
+  border: 1px solid var(--gm-glass-border);
+  border-radius: var(--gm-radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--gm-shadow-sm);
+}
+
+.gm-composer__input {
+  resize: vertical;
+  min-height: 70px;
+  border: none;
+  background: transparent;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  color: var(--gm-text);
+}
+
+.gm-composer__input::placeholder {
+  color: var(--gm-text-soft);
+}
+
+.gm-composer__input:focus {
+  outline: none;
+}
+
+.gm-composer__add {
+  align-self: flex-end;
+}
+
+.gm-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.gm-empty-state {
+  text-align: center;
+  color: var(--gm-text-soft);
+  font-size: 0.85rem;
+  padding: 24px 12px;
+}
+
+.gm-empty-state__icon {
+  font-size: 1.6rem;
+  display: block;
+  margin-bottom: 6px;
+}

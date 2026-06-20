@@ -1,0 +1,33 @@
+.gm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gm-header__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gm-header__sparkle {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.gm-header__title h1 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--gm-text);
+}
+
+.gm-header__subtitle {
+  margin: 2px 0 0;
+  font-size: 0.7rem;
+  color: var(--gm-text-soft);
+}
+
+.gm-header__actions {
+  display: flex;
+  gap: 8px;
+}
