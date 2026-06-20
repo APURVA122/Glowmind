@@ -41,10 +41,7 @@ GlowMind AI also comes as a Chrome Extension that lets users quickly create AI-p
 
 3. Enable **Developer Mode** (top right corner)
 4. Click **Load Unpacked**
-5. Navigate to the folder:
-
-GlowMind Extension/
-
+5. Navigate to the folder: GlowMind Extension/
 6. Select the folder and load it
 7. Pin the extension to your toolbar ✨
 
