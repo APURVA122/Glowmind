@@ -2,21 +2,26 @@ import React, { useState } from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useAuth } from './AuthContext';
 import './GoogleLoginButton.css';
+import { useNavigate } from 'react-router-dom';
+
 
 
 export default function GoogleLoginButton({ label = 'Continue with Google', onError }) {
   const { loginWithGoogle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-
+const navigate = useNavigate();
   const handleGoogleLogin = useGoogleLogin({
     flow: 'auth-code',
     onSuccess: async (response) => {
       setIsLoading(true);
       try {
         const result = await loginWithGoogle(response.code);
-        if (!result.success) {
-          onError?.(result.error || 'Google sign-in failed');
-        }
+
+    if (result.success) {
+      navigate('/app'); //
+    } else {
+      onError?.(result.error || 'Google sign-in failed');
+    }
       } catch (error) {
         onError?.('Google sign-in failed. Please try again.');
       } finally {

@@ -85,8 +85,7 @@ export function AuthProvider({ children }) {
     return applyAuthResult(await response.json());
   };
 
-  // `code` is the authorization code from @react-oauth/google's
-  // popup auth-code flow — see auth/GoogleLoginButton.jsx.
+
   const loginWithGoogle = async (code) => {
     const response = await fetch(`${API_URL}/api/auth/google`, {
       method: 'POST',

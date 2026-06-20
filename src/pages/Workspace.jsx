@@ -3,15 +3,6 @@ import { useAuth } from '../auth/AuthContext';
 import Sidebar from '../components/Sidebar';
 import './Workspace.css';
 
-/**
- * Workspace
- * ---------------------------------------------------------------------
- * Sits behind <ProtectedRoute>. Plays the same role App.jsx used to:
- * a stand-in "host page" so <Sidebar /> can be previewed floating over
- * real-looking content, exactly as it would once injected into an
- * actual site later. The account chip in the nav is the one addition
- * — a visible reminder of who's signed in, with a way to sign out.
- */
 export default function Workspace() {
   const { user, logout } = useAuth();
 
