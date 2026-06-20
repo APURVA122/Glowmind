@@ -1,4 +1,4 @@
 document.getElementById("openApp").addEventListener("click", () => {
-  chrome.tabs.create({ url: "https://component-library-omega-tawny.vercel.app/" });
+  chrome.tabs.create({ url: "https://glowmind-mkql.vercel.app/" });
   
 });
