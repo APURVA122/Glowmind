@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "GlowMind AI",
   "version": "1.0.0",
-  "description": "Your AI-powered wellness companion for journaling, mood tracking, mindful reflection, and personal growth.",
-  "permissions": ["tabs"],
+  "description": "A floating AI notebook that appears over any webpage. Create site-based notes, summarize content, generate bullet points, and simplify reading instantly.",
+  "permissions": ["tabs", "storage", "activeTab"],
   "action": {
     "default_popup": "popup.html",
     "default_title": "GlowMind AI"
