@@ -8,14 +8,6 @@ const ACTIONS = [
   { id: 'tutor', label: 'Explain like a tutor', emoji: '💖', tag: '💖', run: explainLikeTutor },
 ];
 
-/**
- * AIControls
- * ---------------------------------------------------------------------
- * Runs one of the mock AI functions against `sourceText` (the note
- * currently being drafted) and reports the result back up via
- * onResult(text, tagEmoji). Swapping the mock functions in aiStubs.js
- * for real API calls requires no changes here.
- * --------------------------------------------------------------------- */
 export default function AIControls({ sourceText, onResult }) {
   const [loadingAction, setLoadingAction] = useState(null);
   const [error, setError] = useState(null);

@@ -78,7 +78,7 @@ export default function Landing() {
 
                 <div className="gm-mockup__panel">
                   <div className="gm-mockup__panel-header">
-                    <span>✨ GlowMind AI</span>
+                    <span>⚡ GlowMind AI</span>
                   </div>
                   <div className="gm-mockup__note">
                     <span>🧠</span>

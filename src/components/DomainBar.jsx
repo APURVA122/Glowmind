@@ -4,15 +4,7 @@ import { extractDomain } from '../utils/url';
 import { DEFAULT_DOMAINS } from '../utils/constants';
 import './DomainBar.css';
 
-/**
- * DomainBar
- * ---------------------------------------------------------------------
- * Lets the person pick which site's notebook is active, and add a new
- * site by typing or pasting its URL. A new domain is written to
- * storage immediately (with an empty notebook) so it sticks around in
- * the list even before the first note is added. Everything is scoped
- * to `userId` so each signed-in account has its own list of sites.
- * --------------------------------------------------------------------- */
+
 export default function DomainBar({ userId, domain, onDomainChange }) {
   const [siteInput, setSiteInput] = useState('');
   const [error, setError] = useState(null);

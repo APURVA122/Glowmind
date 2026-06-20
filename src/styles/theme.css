@@ -1,9 +1,4 @@
-/* -------------------------------------------------------------------
-   theme.css — design tokens & shared primitives
-   Three named palettes (Pink Dream / Lavender Mist / Soft Mint), a
-   rounded type pairing (Quicksand display + Nunito body), and the
-   button styles shared across every GlowMind component.
-   ------------------------------------------------------------------- */
+
 
 * {
   box-sizing: border-box;

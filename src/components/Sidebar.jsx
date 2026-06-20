@@ -15,19 +15,7 @@ function detectCurrentHost() {
   return DEFAULT_DOMAINS[0];
 }
 
-/**
- * Sidebar
- * ---------------------------------------------------------------------
- * Main container for the GlowMind widget: floating launcher button,
- * sliding glass panel, theme state, and the active "domain" whose
- * notebook is currently shown. Notes are namespaced by the signed-in
- * user's id (from AuthContext) so two accounts on the same browser
- * never see each other's notebooks. In a real content-script
- * deployment, `domain` would just be set once from
- * window.location.hostname and DomainBar's manual switcher becomes
- * purely an "add another site to remember notes for later" tool
- * rather than a way to simulate being on a different page.
- * --------------------------------------------------------------------- */
+
 export default function Sidebar() {
   const { user } = useAuth();
   const userId = user?._id || user?.id;
