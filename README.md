@@ -1,4 +1,5 @@
 # 🌸 GlowMind AI — AI-Powered MERN Notes Workspace
+![GlowMind AI Preview](./assets/image.png)
 
 GlowMind AI is a full-stack MERN application that combines intelligent note-taking, secure authentication, and a calming productivity-focused user experience. Built using MongoDB, Express.js, React, and Node.js, the platform allows users to securely create, manage, and organize notes in a modern glassmorphism-inspired workspace.
 
@@ -27,6 +28,26 @@ https://glowmind.onrender.com/
 * 🤖 AI-Ready Architecture for Future LLM Integration
 
 ---
+## 🧩 Chrome Extension Preview
+
+![Extension UI](./assets/img2.png)
+
+GlowMind AI also comes as a Chrome Extension that lets users quickly create AI-powered notes while browsing.
+
+## 🧩 How to Install Chrome Extension
+
+1. Clone or download the repository
+2. Open Chrome and go to :chrome://extensions/
+
+3. Enable **Developer Mode** (top right corner)
+4. Click **Load Unpacked**
+5. Navigate to the folder:
+
+GlowMind Extension/
+
+6. Select the folder and load it
+7. Pin the extension to your toolbar ✨
+
 
 ## 🛠️ Tech Stack
 
@@ -83,6 +104,7 @@ glowmind-ai/
 ```
 
 ---
+
 
 ## 👩‍💻 Author
 
