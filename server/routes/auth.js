@@ -11,9 +11,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
-// 'postmessage' is the redirect_uri @react-oauth/google's popup flow expects
-// when exchanging an authorization code from the browser (no real redirect
-// happens — the code comes back to the popup via postMessage instead).
+
 const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, 'postmessage');
 
 function signToken(user) {
@@ -89,8 +87,7 @@ router.post(
             const user = await User.findOne({ email });
 
             if (!user || !user.password) {
-                // No user, or an account that only has Google sign-in set up
-                // (no password to compare against).
+            
                 return res.status(400).json({
                     success: false,
                     error: 'Invalid credentials',
@@ -123,8 +120,7 @@ router.post('/google', async (req, res) => {
     }
 
     try {
-        // Exchange the authorization code (from the frontend's Google popup)
-        // for tokens, then verify the ID token's signature + audience.
+      
         const { tokens } = await googleClient.getToken(code);
 
         const ticket = await googleClient.verifyIdToken({
@@ -144,9 +140,7 @@ router.post('/google', async (req, res) => {
                 googleId,
             });
         } else if (!user.googleId) {
-            // An account already exists with this email from a normal
-            // signup — link the Google identity to it instead of creating
-            // a duplicate account.
+           
             user.googleId = googleId;
             await user.save();
         }
