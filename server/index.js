@@ -10,15 +10,10 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(
-    cors({
-        origin: [
-            'http://localhost:5173', // Vite dev server
-            process.env.CLIENT_URL, // your deployed frontend, once you have one
-        ].filter(Boolean),
-        credentials: true,
-    })
-);
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 app.use(express.json());
 
 // Routes
