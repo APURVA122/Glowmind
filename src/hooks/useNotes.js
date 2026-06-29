@@ -1,48 +1,50 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   getNotesForDomain,
-  addNote as addNoteToStorage,
-  updateNote as updateNoteInStorage,
-  deleteNote as deleteNoteFromStorage,
+  addNote as addNoteOnServer,
+  updateNote as updateNoteOnServer,
+  deleteNote as deleteNoteOnServer,
 } from '../utils/storage';
 
-/**
- * useNotes(userId, domain)
- * ---------------------------------------------------------------------
- * Keeps one user's notes for one domain in React state, synced with
- * localStorage via storage.js. Re-reads whenever the user or the
- * active domain changes.
- * --------------------------------------------------------------------- */
-export function useNotes(userId, domain) {
+
+export function useNotes(domain) {
   const [notes, setNotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setNotes(userId ? getNotesForDomain(userId, domain) : []);
-  }, [userId, domain]);
+    let isCurrent = true;
+    setIsLoading(true);
+    setError(null);
 
-  const addNote = useCallback(
-    (text, tag) => {
-      if (!userId) return;
-      setNotes(addNoteToStorage(userId, domain, text, tag));
-    },
-    [userId, domain]
-  );
+    getNotesForDomain(domain)
+      .then((result) => { if (isCurrent) setNotes(result); })
+      .catch((err) => { if (isCurrent) setError(err.message); })
+      .finally(() => { if (isCurrent) setIsLoading(false); });
 
-  const updateNote = useCallback(
-    (noteId, text) => {
-      if (!userId) return;
-      setNotes(updateNoteInStorage(userId, domain, noteId, text));
-    },
-    [userId, domain]
-  );
+    return () => { isCurrent = false; };
+  }, [domain]);
 
-  const deleteNote = useCallback(
-    (noteId) => {
-      if (!userId) return;
-      setNotes(deleteNoteFromStorage(userId, domain, noteId));
-    },
-    [userId, domain]
-  );
+  const addNote = useCallback(async (text, tag) => {
+    try {
+      setNotes(await addNoteOnServer(domain, text, tag));
+      setError(null);
+    } catch (err) { setError(err.message); }
+  }, [domain]);
 
-  return { notes, addNote, updateNote, deleteNote };
+  const updateNote = useCallback(async (noteId, text) => {
+    try {
+      setNotes(await updateNoteOnServer(domain, noteId, text));
+      setError(null);
+    } catch (err) { setError(err.message); }
+  }, [domain]);
+
+  const deleteNote = useCallback(async (noteId) => {
+    try {
+      setNotes(await deleteNoteOnServer(domain, noteId));
+      setError(null);
+    } catch (err) { setError(err.message); }
+  }, [domain]);
+
+  return { notes, addNote, updateNote, deleteNote, isLoading, error };
 }

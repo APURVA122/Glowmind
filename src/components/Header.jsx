@@ -8,7 +8,7 @@ const THEME_META = {
   mint: { emoji: '🌿', label: 'Soft Mint' },
 };
 
-export default function Header({ isOpen, onToggle, theme, onThemeChange }) {
+export default function Header({ isOpen, onToggle, theme, onThemeChange, onSignOut }) {
   const cycleTheme = () => {
     const currentIndex = THEMES.indexOf(theme);
     const next = THEMES[(currentIndex + 1) % THEMES.length];
@@ -35,6 +35,17 @@ export default function Header({ isOpen, onToggle, theme, onThemeChange }) {
         >
           {THEME_META[theme].emoji}
         </button>
+        {onSignOut && (
+          <button
+            type="button"
+            className="gm-icon-btn"
+            onClick={onSignOut}
+            title="Sign out"
+            aria-label="Sign out"
+          >
+            🚪
+          </button>
+        )}
         <button
           type="button"
           className="gm-icon-btn"

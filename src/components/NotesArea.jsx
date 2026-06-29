@@ -9,6 +9,8 @@ export default function NotesArea({
   onAddNote,
   onDeleteNote,
   onUpdateNote,
+  isLoading = false,
+  loadError = null,
 }) {
   const handleAdd = () => {
     const trimmed = draftText.trim();
@@ -35,8 +37,15 @@ export default function NotesArea({
         </button>
       </div>
 
+      {loadError && <div className="gm-error-banner">{loadError}</div>}
+
       <div className="gm-notes-list">
-        {notes.length === 0 ? (
+        {isLoading && notes.length === 0 ? (
+          <div className="gm-empty-state">
+            <span className="gm-empty-state__icon" aria-hidden="true">✨</span>
+            <p>Loading your notes…</p>
+          </div>
+        ) : notes.length === 0 ? (
           <div className="gm-empty-state">
             <span className="gm-empty-state__icon" aria-hidden="true">🦢</span>
             <p>No notes yet for this page. Start writing or try an AI action above ✨</p>

@@ -1,43 +1,51 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { getAllDomains, addDomain, removeDomain } from '../utils/storage';
 import { extractDomain } from '../utils/url';
 import { DEFAULT_DOMAINS } from '../utils/constants';
 import './DomainBar.css';
 
 
-export default function DomainBar({ userId, domain, onDomainChange }) {
+export default function DomainBar({ domain, onDomainChange }) {
   const [siteInput, setSiteInput] = useState('');
   const [error, setError] = useState(null);
+  const [knownDomains, setKnownDomains] = useState(DEFAULT_DOMAINS);
 
-  const knownDomains = useMemo(() => {
-    if (!userId) return DEFAULT_DOMAINS;
-    const stored = getAllDomains(userId);
-    return Array.from(new Set([...DEFAULT_DOMAINS, ...stored, domain]));
-  }, [userId, domain]);
+  const refreshDomains = useCallback(async () => {
+    try {
+      const stored = await getAllDomains();
+      setKnownDomains(Array.from(new Set([...DEFAULT_DOMAINS, ...stored, domain])));
+    } catch {
+      // silently keep the default list if the fetch fails
+    }
+  }, [domain]);
+
+  useEffect(() => { refreshDomains(); }, [refreshDomains]);
 
   const isDefaultDomain = DEFAULT_DOMAINS.includes(domain);
 
-  const handleAddSite = (event) => {
-    event.preventDefault();
-    if (!userId) return;
-
+  const handleAddSite = async (e) => {
+    e.preventDefault();
     const cleanDomain = extractDomain(siteInput);
-
     if (!cleanDomain) {
       setError('Enter a valid URL, like notion.so or https://example.com');
       return;
     }
-
-    addDomain(userId, cleanDomain);
-    onDomainChange(cleanDomain);
-    setSiteInput('');
-    setError(null);
+    try {
+      await addDomain(cleanDomain);
+      onDomainChange(cleanDomain);
+      setSiteInput('');
+      setError(null);
+      refreshDomains();
+    } catch (err) { setError(err.message); }
   };
 
-  const handleRemoveDomain = () => {
-    if (!userId) return;
-    removeDomain(userId, domain);
-    onDomainChange(DEFAULT_DOMAINS[0]);
+  const handleRemoveDomain = async () => {
+    try {
+      await removeDomain(domain);
+      onDomainChange(DEFAULT_DOMAINS[0]);
+      setError(null);
+      refreshDomains();
+    } catch (err) { setError(err.message); }
   };
 
   return (
@@ -72,10 +80,7 @@ export default function DomainBar({ userId, domain, onDomainChange }) {
           className="gm-domain-bar__input"
           placeholder="Add a site… e.g. wikipedia.org"
           value={siteInput}
-          onChange={(e) => {
-            setSiteInput(e.target.value);
-            if (error) setError(null);
-          }}
+          onChange={(e) => { setSiteInput(e.target.value); if (error) setError(null); }}
         />
         <button type="submit" className="gm-mini-btn">add</button>
       </form>

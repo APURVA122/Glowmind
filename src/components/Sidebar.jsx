@@ -4,7 +4,6 @@ import DomainBar from './DomainBar';
 import NotesArea from './NotesArea';
 import AIControls from './AIControls';
 import { useNotes } from '../hooks/useNotes';
-import { useAuth } from '../auth/AuthContext';
 import { DEFAULT_DOMAINS } from '../utils/constants';
 import './Sidebar.css';
 
@@ -16,10 +15,7 @@ function detectCurrentHost() {
 }
 
 
-export default function Sidebar() {
-  const { user } = useAuth();
-  const userId = user?._id || user?.id;
-
+export default function Sidebar({ onSignOut }) {
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useState('pink');
   const [domain, setDomain] = useState(detectCurrentHost);
@@ -27,7 +23,7 @@ export default function Sidebar() {
   const [draftText, setDraftText] = useState('');
   const [draftTag, setDraftTag] = useState('📝');
 
-  const { notes, addNote, updateNote, deleteNote } = useNotes(userId, domain);
+  const { notes, addNote, updateNote, deleteNote, isLoading, error } = useNotes(domain);
 
   const handleDraftChange = (value) => {
     setDraftText(value);
@@ -68,9 +64,10 @@ export default function Sidebar() {
             onToggle={() => setIsOpen((open) => !open)}
             theme={theme}
             onThemeChange={setTheme}
+            onSignOut={onSignOut}
           />
 
-          <DomainBar userId={userId} domain={domain} onDomainChange={setDomain} />
+          <DomainBar domain={domain} onDomainChange={setDomain} />
 
           <AIControls sourceText={draftText} onResult={handleAIResult} />
 
@@ -81,6 +78,8 @@ export default function Sidebar() {
             onAddNote={handleAddNote}
             onDeleteNote={deleteNote}
             onUpdateNote={updateNote}
+            isLoading={isLoading}
+            loadError={error}
           />
         </div>
       </aside>
